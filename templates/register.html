@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Регистрация</h2>
+        <form method="POST" action="">
+            <p>
+                <label for="email">Email:</label>
+                <input type="email" name="email" required><br>
+            </p>
+            <p>
+                <label for="login">Логин:</label>
+                <input type="text" name="login" required><br>
+            </p>
+            <p>
+                <label for="first_name">Имя:</label>
+                <input type="text" name="first_name" required><br>
+            </p>
+            <p>
+                <label for="last_name">Фамилия:</label>
+                <input type="text" name="last_name" required><br>
+            </p>
+            <p>
+                <label for="middle_name">Отчество:</label>
+                <input type="text" name="middle_name"><br> <!-- Необязательное поле -->
+            </p>
+            <p>
+                <label for="phone">Телефон:</label>
+                <input type="text" name="phone"><br> <!-- Необязательное поле -->
+            </p>
+            <p>
+                <label for="educational_institution">Учебное заведение:</label>
+                <input type="text" name="educational_institution"><br> <!-- Необязательное поле -->
+            </p>
+            <p>
+                <label for="password">Пароль:</label>
+                <input type="password" name="password" required><br>
+            </p>
+            <p>
+                <label for="confirm">Подтверждение пароля:</label>
+                <input type="password" name="confirm" required><br>
+            </p>
+            <p>
+                <button type="submit">Зарегистрироваться</button>
+            </p>
+        </form>
+        <a href="{{ url_for('login') }}">Войти</a>
+    </div>
+</body>
+</html>

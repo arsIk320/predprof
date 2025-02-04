@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h2 id="h">Добро пожаловать, {{ current_user.first_name }} {{ current_user.last_name }}</h2>
+    <div class="applications">
+    <div class="container" id="applications"> 
+        <h3>Ваш инвентарь</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Количество</th>
+                    <th>Состояние</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in user_inventory %}
+                    <tr>
+                        <td>{{ item.item_name }}</td>
+                        <td>{{ item.item_quantity }}</td>
+                        <td>{{ item.item_condition }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="container" id="applications">
+        <h3>Ваши заявки</h3>
+    </div>
+    </div>
+    <h3 id="h">Заявки</h3>
+    <div class="applications">
+    <div class="container" id="applications">
+        <h3>Создать заявку на инвентарь</h3>
+        <form method="POST" action="{{ url_for('request_inventory') }}">
+            <p>
+                <label for="item_name">Название инвентаря:</label>
+                <input type="text" name="item_name" required><br>
+            </p>
+            <p>
+                <label for="quantity">Количество:</label>
+                <input type="number" name="quantity" required><br>
+            </p>
+            <p>
+                <button type="submit">Отправить заявку</button>
+            </p>
+        </form>
+    </div>
+    
+    <div class="container" id="applications">
+        <h3>Создать заявку на ремонт</h3>
+        <form method="POST" action="{{ url_for('user') }}">
+            <input type="hidden" name="create_repair_request">
+            <p>
+                <label for="item_name">Название инвентаря:</label>
+                <input type="text" name="item_name" required><br>
+            </p>
+            <p>
+                <label for="description">Описание:</label>
+                <textarea name="description" rows="4" cols="32" required></textarea><br>
+            </p>
+            <p>
+                <button type="submit">Создать заявку на ремонт</button>
+            </p>
+        </form>
+    </div>
+    </div>
+        <a href="{{ url_for('logout') }}" id="logout">Выйти</a>
+    </div>
+</body>
+</html>

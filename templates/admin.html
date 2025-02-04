@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Административная панель</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function openPopup(content) {
+            $('#popup').html(content);
+            $('#popup').css('display', 'block');
+        }
+
+        function closePopup() {
+            $('#popup').css('display', 'none');
+        }
+    </script>
+</head>
+<body>
+    <h2>Добро пожаловать, Администратор {{ current_user.name }}</h2>
+    <div class="container">
+
+        <h3>Добавить позицию инвентаря</h3>
+        <form method="POST" action="{{ url_for('admin') }}">
+            <input type="hidden" name="add_item">
+            <p>
+                <label for="name">Название:</label>
+                <input type="text" name="name" required><br>
+            </p>
+            <p>
+                <label for="quantity">Количество:</label>
+                <input type="number" name="quantity" required><br>
+            </p>
+            <p>
+                <label for="status">Статус:</label>
+                <input type="text" name="status" required><br>
+            </p>
+            <p>
+                <button type="submit">Добавить позицию</button>
+            </p>
+        </form>
+        </div>
+        <div class="container">
+        <h3>Добавить план закупок</h3>
+        <form method="POST" action="{{ url_for('admin') }}">
+            <input type="hidden" name="add_plan">
+            <p>
+                <label for="item_name">Название товара:</label>
+                <input type="text" name="item_name" required><br>
+            </p>
+            <p>
+                <label for="supplier">Поставщик:</label>
+                <input type="text" name="supplier" required><br>
+            </p>
+            <p>
+                <label for="price">Цена:</label>
+                <input type="number" name="price" step="0.01" required><br>
+            </p>
+            <p>
+                <button type="submit">Добавить план закупок</button>
+            </p>
+        </form>
+    </div>
+    <div class="container">
+        <h3>Инвентарь</h3>
+        <ul>
+            {% for item in inventory_items %}
+                <li>{{ item.name }} - {{ item.quantity }} - {{ item.status }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="container">
+        <h3>Планы закупок</h3>
+        <ul>
+            {% for plan in purchase_plans %}
+                <li>{{ plan.item_name }} - {{ plan.supplier }} - {{ plan.price }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="container">
+        <h3>Заявки</h3>
+        <ul>
+            {% for req in requests %}
+                <li>{{ req.item_name }} - {{ req.quantity }} - {% if req.approved %}Одобрено{% else %}Ожидает одобрения{% endif %}
+                    <form method="POST" action="" style="display:inline;">
+                        <input type="hidden" name="approve_request">
+                        <input type="hidden" name="request_id" value="{{ req.id }}">
+                        <button type="submit">Одобрить</button>
+                    </form>
+                    <form method="POST" action="" style="display:inline;">
+                        <input type="hidden" name="reject_request">
+                        <input type="hidden" name="request_id" value="{{ req.id }}">
+                        <button type="submit">Отклонить</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="container">
+        <h3>Заявки на ремонт</h3>
+        <ul>
+            {% for repair_request in repair_requests %}
+                <li>{{ repair_request.item_name }} - {{ repair_request.description }} - {{ repair_request.status }}
+                    <form method="POST" action="" style="display:inline;">
+                        <input type="hidden" name="approve_repair_request">
+                        <input type="hidden" name="repair_request_id" value="{{ repair_request.id }}">
+                        <button type="submit">Одобрить</button>
+                    </form>
+                    <form method="POST" action="" style="display:inline;">
+                        <input type="hidden" name="reject_repair_request">
+                        <input type="hidden" name="repair_request_id" value="{{ repair_request.id }}">
+                        <button type="submit">Отклонить</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+        <a href="{{ url_for('logout') }}" id="logout">Выйти</a>
+</body>
+</html>
