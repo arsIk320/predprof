@@ -9,10 +9,11 @@ body {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #1F2833;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-top: 52px;
     border-radius: 15px;
+    background: rgb(0, 0, 0, 0.1);
+    backdrop-filter: blur(15px);
 }
 
 h2, h3 {
@@ -50,6 +51,21 @@ form button {
 }
 
 form button:hover {
+    background-color: #66FCF1;
+}
+
+.headerbutton{
+    padding: 10px 20px;
+    background-color: #45A29E;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    width: 300px;
+    font-size: 17px;
+}
+
+.headerbutton:hover{
     background-color: #66FCF1;
 }
 
@@ -121,10 +137,66 @@ table{
 .header{
     width: 100%;
     height: 70px;
-    padding: 0px 30px;
-    background-color: red;
+    background-color: #2b3847;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
+}
+.text{
+    color: white;
+    font-size: 25px;
+    line-height: 1.5em;
+}
+#predprof{
+    font-size: 35px;
+    color: white;
+}
+.main-data{
+    display: flex;
+    flex-direction: row;
+    justify-items: space-around;
+    margin: 25px;
+}
+img{
+    width: 230px;
+    margin: 10px;
+}
+.photo{
+    display: flex;
+    flex-direction: column;
+}
+#user-info{
+    color: white;
+    font-size: 25px;
+    margin-bottom: 25px;
+}
+#user{
+    background-color: #19212a;
+}
+.upper-containers {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; /* Adjusts spacing between items */
+    align-items: center;
+}
+.container {
+    width: 45%;
+    margin: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    color: white;
+    justify-content: space-between;
+}
+.logins {
+    background: url(https://i.pinimg.com/1200x/51/04/66/510466de77739d0a6a49d422fe0e6c45.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+.registers {
+    background: url(https://i.pinimg.com/1200x/51/04/66/510466de77739d0a6a49d422fe0e6c45.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+
 }
