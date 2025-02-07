@@ -61,3 +61,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+document.querySelectorAll('.flash-message').forEach(message => {
+    setTimeout(() => {
+        message.style.animation = 'fadeOut 0.5s ease forwards'; // Анимация исчезновения
+        setTimeout(() => {
+            message.remove();
+        }, 500); // Задержка для завершения анимации
+    }, 5000);
+});
