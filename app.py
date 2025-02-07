@@ -97,7 +97,7 @@ def login():
         user = user_by_email or user_by_login
 
         if not user or not check_password_hash(user.password, password):
-            flash('Неверный email/логин или пароль')
+            flash('Неверный email/логин или пароль', 'error')
             return redirect(url_for('login'))
 
         login_user(user, remember=remember)
@@ -126,7 +126,7 @@ def register():
         user_by_login = User.query.filter_by(login=login).first()
 
         if user_by_email or user_by_login:
-            flash('Этот email или логин уже зарегистрирован')
+            flash('Этот email или логин уже зарегистрирован', 'error')
             return redirect(url_for('register'))
 
         new_user = User(
@@ -197,7 +197,7 @@ def admin():
 
                 db.session.commit()
             else:
-                flash('Недостаточно инвентаря для выполнения этой заявки.')
+                flash('Недостаточно инвентаря для выполнения этой заявки.', 'error')
         
         if 'reject_request' in request.form:
             request_id = int(request.form.get('request_id'))
@@ -255,7 +255,7 @@ def user():
             new_repair_request = RepairRequest(item_name=item_name, description=description, user_id=current_user.id)
             db.session.add(new_repair_request)
             db.session.commit()
-            flash('Заявка на ремонт успешно создана!')
+            flash('Заявка на ремонт успешно создана!', 'success')
             return redirect(url_for('user'))
     
         if 'request' in request.form:
@@ -267,11 +267,11 @@ def user():
                 new_request = Request(item_name=item_name, quantity=quantity, user=current_user, inventory_item=inventory_item)
                 db.session.add(new_request)
                 db.session.commit()
-                flash('Заявка успешно создана!')
+                flash('Заявка успешно создана!', 'success')
                 print(1)
                 return redirect(url_for('user'))
             else:
-                flash('Инвентарь не найден')
+                flash('Инвентарь не найден', 'error')
 
         if 'logout' in request.form:
             return redirect(url_for('logout'))
