@@ -1,25 +1,63 @@
-document.getElementById('add-student').addEventListener('click', function() {
-    const firstName = document.getElementById('first-name').value.trim();
-    const lastName = document.getElementById('last-name').value.trim();
-    const age = document.getElementById('age').value.trim();
-    const className = document.getElementById('class').value.trim();
+/*document.addEventListener('DOMContentLoaded', function() {
+    const toggleInventoryButton = document.getElementById('toggle-inventory');
+    const inventoryContainer = document.getElementById('inventory-container');
+    const requestContainer = document.getElementById('request-container');
 
-    if (firstName && lastName && age && className) {
-        const listItem = document.createElement('li');
-        listItem.textContent = `${firstName} ${lastName}, Возраст: ${age}, Класс: ${className}`;
-        document.getElementById('list').appendChild(listItem);
+    toggleInventoryButton.addEventListener('click', function() {
+        if (inventoryContainer.style.display === 'none') {
+            inventoryContainer.style.display = 'block';
+            requestContainer.style.display = 'block';
+        } else {
+            inventoryContainer.style.display = 'none';
+            requestContainer.style.display = 'none';
+        }
+    });
 
-        // Очистка полей ввода
-        document.getElementById('first-name').value = '';
-        document.getElementById('last-name').value = '';
-        document.getElementById('age').value = '';
-        document.getElementById('class').value = '';
-    } else {
-        alert("Пожалуйста, заполните все поля.");
-    }
+    const requestButton = document.getElementById('request-button');
+    const inventoryRequest = document.getElementById('inventory-request');
+    const repairRequest = document.getElementById('request-repair-container');
+
+    requestButton.addEventListener('click', function() {
+        if (inventoryRequest.style.display === 'none') {
+            repairRequest.style.display = 'block';
+            inventoryRequest.style.display = 'block';
+        } else {
+            repairRequest.style.display = 'none';
+            inventoryRequest.style.display = 'none';
+        }
+    });
+
 });
+*/
 
-document.getElementById('remove-all').addEventListener('click', function() {
-    const list = document.getElementById('list');
-    list.innerHTML = ''; // Удаляем всех учеников из списка
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleInventoryButton = document.getElementById('toggle-inventory');
+    const requestButton = document.getElementById('request-button');
+    const upperContainers = document.getElementById('upper');
+    const lowerContainers = document.getElementById('lower');
+    const MainData = document.getElementById('main-data');
+
+    toggleInventoryButton.addEventListener('click', function(){
+        if (upperContainers.style.display === 'none') {
+            MainData.style.display = 'none';
+            upperContainers.style.display = 'flex';
+        } else {
+            upperContainers.style.display = 'none';
+        }
+        if ((lowerContainers.style.display === 'none') && (upperContainers.style.display === 'none')) {
+            MainData.style.display = 'flex';
+        }
+    });
+
+    requestButton.addEventListener('click', function() {
+        if (lowerContainers.style.display === 'none') {
+            MainData.style.display = 'none';
+            lowerContainers.style.display = 'flex';
+        } else {
+            lowerContainers.style.display = 'none';
+        }
+        if ((lowerContainers.style.display === 'none') && (upperContainers.style.display === 'none')) {
+            MainData.style.display = 'flex';
+        }
+    });
 });
