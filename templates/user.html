@@ -9,6 +9,18 @@
     <link rel="shortcut icon" href="{{ url_for('static', filename='images/develop.png')}}">
 </head>
 <body>
+    <div class="flash-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }} show">
+                        <span>{{ message }}</span>
+                        <span class="close-btn" onclick="this.parentElement.style.display='none'">×</span>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
     <form name="header" class="header" method="POST">
         <button name="inventory" id="toggle-inventory" class="headerbutton" type="button">Просмотр инвентаря и заявок</button>
         <button name="requests" id='request-button' class="headerbutton" type="button">Заявки</button>

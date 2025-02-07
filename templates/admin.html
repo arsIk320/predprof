@@ -19,6 +19,18 @@
     </script>
 </head>
 <body>
+    <div class="flash-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }} show">
+                        <span>{{ message }}</span>
+                        <span class="close-btn" onclick="this.parentElement.style.display='none'">×</span>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
     <div class="container">
         <h3>Добавить позицию инвентаря</h3>
         <form method="POST" action="{{ url_for('admin') }}">
@@ -94,7 +106,7 @@
         <h3>Инвентарь</h3>
         <ul>
             {% for item in inventory_items %}
-                <li>{{ item.name }} - {{ item.quantity }} - {{ item.status }}</li>
+                <li style="justify-self: center;">{{ item.name }} - {{ item.quantity }} - {{ item.status }}</li>
             {% endfor %}
         </ul>
     </div>
@@ -102,7 +114,7 @@
         <h3>Планы закупок</h3>
         <ul>
             {% for plan in purchase_plans %}
-                <li>{{ plan.item_name }} - {{ plan.supplier }} - {{ plan.price }}</li>
+                <li style="justify-self: center;">{{ plan.item_name }} - {{ plan.supplier }} - {{ plan.price }}</li>
             {% endfor %}
         </ul>
     </div>
@@ -110,7 +122,7 @@
         <h3>Заявки</h3>
         <ul>
             {% for req in requests %}
-                <li>{{ req.item_name }} - {{ req.quantity }} - {% if req.approved == 1 %}Одобренa{% elif req.approved == 0 %}Ожидает одобрения{% else %}Отклонена{% endif %}
+                <li style="justify-self: center;">{{ req.item_name }} - {{ req.quantity }}
                     <form method="POST" action="" style="display:inline;">
                         <input type="hidden" name="approve_request">
                         <input type="hidden" name="request_id" value="{{ req.id }}">
@@ -129,7 +141,7 @@
         <h3>Заявки на ремонт</h3>
         <ul>
             {% for repair_request in repair_requests %}
-                <li>{{ repair_request.item_name }} - {{ repair_request.description }} - {{ repair_request.status }}
+                <li style="justify-self: center;">{{ repair_request.item_name }} - {{ repair_request.description }} - {{ repair_request.status }}
                     <form method="POST" action="" style="display:inline;">
                         <input type="hidden" name="approve_repair_request">
                         <input type="hidden" name="repair_request_id" value="{{ repair_request.id }}">
