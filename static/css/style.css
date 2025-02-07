@@ -12,7 +12,7 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-top: 52px;
     border-radius: 15px;
-    background: rgb(0, 0, 0, 0.1);
+    background-color: #1f2833;
     backdrop-filter: blur(15px);
     justify-self: center;
 }
